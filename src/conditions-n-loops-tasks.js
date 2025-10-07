@@ -97,8 +97,11 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (!(a + b > c && b + c > a && a + c > b)) {
+    return false;
+  }
+  return a === b || a === c || b === c;
 }
 
 /**
@@ -150,8 +153,12 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let reversedStr = '';
+  for (let i = str.length; i > 0; i -= 1) {
+    reversedStr += str[i - 1];
+  }
+  return str === reversedStr;
 }
 
 /**
@@ -168,8 +175,13 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i - 1] === letter) {
+      return i - 1;
+    }
+  }
+  return -1;
 }
 
 /**
