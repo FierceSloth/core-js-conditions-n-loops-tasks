@@ -21,6 +21,9 @@
  *  0  => true
  *  -5 => false
  */
+
+// start task
+
 function isPositive(/* number */) {
   throw new Error('Not implemented');
 }
