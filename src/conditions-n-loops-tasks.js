@@ -118,8 +118,21 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const ROM_DIGITS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+  let result = '';
+  const digits = num % 10;
+  let tens = Math.floor(num / 10);
+
+  while (tens > 0) {
+    result += 'X';
+    tens -= 1;
+  }
+  if (digits !== 0) {
+    result += ROM_DIGITS[digits - 1];
+  }
+
+  return result;
 }
 
 /**
@@ -137,8 +150,45 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const DIGITS = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  let result = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    let word = '';
+
+    if (char >= '0' && char <= '9') word = DIGITS[+char];
+    switch (char) {
+      case '-':
+        word = 'minus';
+        break;
+      case '.':
+      case ',':
+        word = 'point';
+        break;
+      default:
+        break;
+    }
+
+    if (word) {
+      if (result !== '') result += ' ';
+      result += word;
+    }
+  }
+
+  return result;
 }
 
 /**
