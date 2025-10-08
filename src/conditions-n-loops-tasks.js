@@ -227,8 +227,8 @@ function isPalindrome(str) {
  */
 function getIndexOf(str, letter) {
   for (let i = 0; i < str.length; i += 1) {
-    if (str[i - 1] === letter) {
-      return i - 1;
+    if (str[i] === letter) {
+      return i;
     }
   }
   return -1;
@@ -249,8 +249,16 @@ function getIndexOf(str, letter) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const strNum = String(num);
+  const strDigit = String(digit);
+
+  for (let i = 0; i < strNum.length; i += 1) {
+    if (strNum[i] === strDigit) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -266,8 +274,24 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  for (let i = 0; i < arr.length; i += 1) {
+    let leftSum = 0;
+    let rightSum = 0;
+
+    for (let i2 = i - 1; i2 >= 0; i2 -= 1) {
+      leftSum += arr[i2];
+    }
+    for (let i3 = i + 1; i3 < arr.length; i3 += 1) {
+      rightSum += arr[i3];
+    }
+
+    if (leftSum === rightSum) {
+      return i;
+    }
+  }
+
+  return -1;
 }
 
 /**
@@ -347,10 +371,48 @@ function sortByAsc(/* arr */) {
  *  '012345', 2 => '024135' => '043215'
  *  'qwerty', 2 => 'qetwry' => 'qtrewy'
  *  '012345', 3 => '024135' => '043215' => '031425'
- *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
+ *  'qwerty', 4 => 'qetwry' => 'qtrewy' => 'qrwtey' => 'qwerty'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let cycleLength = 0;
+  let copyStr = str;
+
+  do {
+    let odd = '';
+    let even = '';
+
+    for (let i = 0; i < copyStr.length; i += 1) {
+      if (i % 2 === 0) {
+        even += copyStr[i];
+      } else {
+        odd += copyStr[i];
+      }
+    }
+
+    copyStr = even + odd;
+    cycleLength += 1;
+  } while (copyStr !== str);
+
+  let trueIterations = iterations % cycleLength;
+  let result = str;
+
+  while (trueIterations > 0) {
+    let odd = '';
+    let even = '';
+
+    for (let i = 0; i < result.length; i += 1) {
+      if (i % 2 === 0) {
+        even += result[i];
+      } else {
+        odd += result[i];
+      }
+    }
+
+    result = even + odd;
+    trueIterations -= 1;
+  }
+
+  return result;
 }
 
 /**
